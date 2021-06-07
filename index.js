@@ -1,13 +1,15 @@
+require('dotenv').config();
 const Discord = require('discord.js')
 const bot = new Discord.Client();
 const commandHandler = "!";
-const token = "xxxxxx"
+const token = process.env.TOKEN;
+console.log(token)
 
 const fetch = require('node-fetch');
 const { loadavg } = require('node:os');
 
 bot.once('ready',()=> {
-    console.log("Kaksahi Hatake is online")
+    console.log("Bot is now online")
 })
 
 bot.on("message", message => {
@@ -145,7 +147,6 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
   
-
 
 bot.login(token)
 
