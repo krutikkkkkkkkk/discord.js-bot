@@ -3,7 +3,6 @@ const Discord = require('discord.js')
 const bot = new Discord.Client();
 const commandHandler = "!";
 const token = process.env.TOKEN;
-console.log(token)
 
 const fetch = require('node-fetch');
 
@@ -21,15 +20,18 @@ if(command === "ping") {
     message.channel.send('>>> pong!');
 }
 
+//command
 else if(command === "commands") {
 const commandList = `!ping 
+!time
 !weather <city> 
 !bin <BIN>
-!dict <word>`;
+!dict <word>
+`;
 message.channel.send(`>>> ${commandList}`);
 }
 
-///Weather Command
+///Weather Status
 else if(command === "weather") {
     const apiKey = "89ef8a05b6c964f4cab9e2f97f696c81"; 
     const kelvin = 273; 
@@ -88,7 +90,7 @@ Country: ${country} ${flag}`;
         message.reply("Invalid BIN");
       });
 }
-
+///Dictionary
 else if(command === "dict") {
     let dict = agruments[0];
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${dict}`)
@@ -110,7 +112,7 @@ else if(command === "dict") {
   message.reply("Invalid Input")
 });  
 }
-
+///Time
 else if(command === "time"){
     let d = new Date();
     let h = d.getHours();
@@ -119,25 +121,11 @@ else if(command === "time"){
     let time = `${h}:${m}:${s}`
     message.channel.send(`>>> ${time} IST`)
 }
-
-else if(command === "ban"){
-    if(!agruments[0]){
-        message.channel.send(">>> No username provided")
-    }
-    else {
-        const user = message.mentions.users.first();
-        if(user){
-            const member = member.guild.member(user);
-            if(member){
-                member.kick();
-            }
-        }
-
-    }
-    
+///Echo
+else if(command === "echo"){
+    let echo = agruments[0];
+    message.channel.send(echo)
 }
-
-
 
 
 })
