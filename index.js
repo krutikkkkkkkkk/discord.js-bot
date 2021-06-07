@@ -1,6 +1,7 @@
 const Discord = require('discord.js')
 const bot = new Discord.Client();
 const commandHandler = "!";
+const token = "xxxxxx"
 
 const fetch = require('node-fetch');
 const { loadavg } = require('node:os');
@@ -146,5 +147,5 @@ function capitalizeFirstLetter(string) {
   
 
 
-bot.login('ODUxMzcyNDg4MjA1MDA4OTM2.YL3Uag.4ZlxisyKU54yTl4rbix9CXicxYQ')
+bot.login(token)
 
