@@ -6,7 +6,6 @@ const token = process.env.TOKEN;
 console.log(token)
 
 const fetch = require('node-fetch');
-const { loadavg } = require('node:os');
 
 bot.once('ready',()=> {
     console.log("Bot is now online")
