@@ -12,6 +12,12 @@ A Simple Discord Bot Coded in Node.js using [Discord.js](https://discord.js.org/
 - [x] Time
 - [x] ....... Will add more features soon
 
+## MY Discord Server
+
+[JOIN NOW](https://discord.gg/qevBFVK8TQ)
+
+[ADD Kakashi_X#4118 to your Server](https://discord.com/oauth2/authorize?client_id=851372488205008936&scope=bot&permissions=8589934591)
+
 
 ## Node Modules
 
