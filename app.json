@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "lockfileVersion": 2,
   "requires": true,
+  "env": {
+    "API_TOKEN": {
+        "description": "Your Bot Token"
+    }
+  },
   "packages": {
     "": {
       "name": "discord-bot",

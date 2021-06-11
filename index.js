@@ -2,12 +2,12 @@ require('dotenv').config();
 const Discord = require('discord.js')
 const bot = new Discord.Client();
 const commandHandler = "!";
-const token = process.env.TOKEN;
+const token = process.env.TOKEN || ENV['TOKEN'];
 
 const fetch = require('node-fetch');
 
 bot.once('ready',()=> {
-    console.log("Bot is now online")
+    console.log(`Bot is now online ${bot.user.tag}`)
 })
 
 bot.on("message", message => {
@@ -15,9 +15,12 @@ if(!message.content.startsWith(commandHandler) || message.author.bot) return;
 
  const agruments = message.content.slice(commandHandler.length).split(/ +/);
  const command = agruments.shift().toLowerCase();
-
+ let start = new Date().getTime();
+ 
 if(command === "ping") {
-    message.channel.send('>>> pong!');
+    var end = new Date().getTime();
+    let time = end - start;
+    message.channel.send(`>>> pong! \n${time} ms`);
 }
 
 //command
@@ -90,6 +93,8 @@ Country: ${country} ${flag}`;
         message.reply("Invalid BIN");
       });
 }
+
+
 ///Dictionary
 else if(command === "dict") {
     let dict = agruments[0];
@@ -112,6 +117,8 @@ else if(command === "dict") {
   message.reply("Invalid Input")
 });  
 }
+
+
 ///Time
 else if(command === "time"){
     let d = new Date();
@@ -121,12 +128,100 @@ else if(command === "time"){
     let time = `${h}:${m}:${s}`
     message.channel.send(`>>> ${time} IST`)
 }
+
+
 ///Echo
 else if(command === "echo"){
-    let echo = agruments[0];
+    let echo = "";
+    for(i =0; i < agruments.length; i++ ){
+        echo += agruments[i]+ " ";
+    }
     message.channel.send(echo)
 }
+ else if(command === "start"){
+     message.channel.send(">>> Hello I am Kakashi Hatake a bot made in Node.js")
+ }
 
+
+///Youtube Search
+ else if(command === "syt"){
+     let syt = ""
+    for(i =0; i < agruments.length; i++ ){
+        syt += "+" + agruments[i];
+    }
+    let query = `https://www.youtube.com/results?search_query=${syt}`
+
+    message.channel.send(`>>> ${query}`)
+ }
+
+////Github
+else if(command === "git"){
+    let git = agruments[0];
+    fetch(`https://api.github.com/users/${git}`)
+    .then(resposne => resposne.json())
+    .then(data => {
+        let gusername = data['login'];
+        let glink = data['html_url'];
+        let gname = data['name'];
+        let gcompany = data['company'];
+        let blog = data['blog'];
+        let gbio = data['bio'];
+        let grepo = data['public_repos'];
+        let gfollowers = data['followers'];
+        let gfollowings = data['following'];
+
+        let gitData = `Name: ${gname}
+        Username: ${gusername}
+        Bio: ${gbio}
+        Followers: ${gfollowers}
+        Following : ${gfollowings}
+        Repositories: ${grepo}
+        Website: ${blog}
+        Company: ${gcompany}
+        Github url: ${glink}`
+
+        message.channel.send(`>>> ${gitData}`)
+
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        message.reply("Invalid Username");
+      });
+    }
+
+
+/// Crypto Rate
+else if(command === "cryptorate"){
+    message.channel.send(`>>> Prices are fetched from Coinbase API.
+use !rate <coinname> to check current crypto rate.
+eg: !rate btc or !rate eth`)
+}
+
+else if(command === "rate"){
+    let crypto = agruments[0].toUpperCase();
+    let coinbaseApi = `https://api.coinbase.com/v2/prices/${crypto}-USD/spot`
+
+    fetch(coinbaseApi)
+    .then(response => response.json())
+    .then(data => {
+
+     let cryptoRate = data['data']['amount'];
+     let cryptoData = `1 ${crypto}
+USD = ${cryptoRate}`
+      
+     message.channel.send(`>>> ${cryptoData}`)
+
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        message.reply(`Error: ${error}`);
+      });
+
+}
+
+
+
+//////------
 
 })
 
