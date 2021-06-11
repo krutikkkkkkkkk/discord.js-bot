@@ -1,5 +1,5 @@
-# discord-bot
+# discord.js-bot
 
 
 ## Heroku Deploy
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/reboot13-git/discord-bot)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/reboot13-git/discord.js-bot)
