@@ -15,21 +15,21 @@ if(!message.content.startsWith(commandHandler) || message.author.bot) return;
 
  const agruments = message.content.slice(commandHandler.length).split(/ +/);
  const command = agruments.shift().toLowerCase();
- let start = new Date().getTime();
  
 if(command === "ping") {
-    var end = new Date().getTime();
-    let time = end - start;
-    message.channel.send(`>>> pong! \n${time} ms`);
+    message.channel.send(`>>> pong!`);
 }
 
 //command
 else if(command === "commands") {
 const commandList = `!ping 
 !time
+!cryptorate
 !weather <city> 
 !bin <BIN>
 !dict <word>
+!git <github_username>
+!syt <query>
 `;
 message.channel.send(`>>> ${commandList}`);
 }
