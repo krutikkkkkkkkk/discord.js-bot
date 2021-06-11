@@ -2,7 +2,7 @@ require('dotenv').config();
 const Discord = require('discord.js')
 const bot = new Discord.Client();
 const commandHandler = "!";
-const token = process.env.TOKEN;
+const token = process.env.TOKEN || ENV['TOKEN'];
 
 const fetch = require('node-fetch');
 
@@ -171,14 +171,14 @@ else if(command === "git"){
         let gfollowings = data['following'];
 
         let gitData = `Name: ${gname}
-        Username: ${gusername}
-        Bio: ${gbio}
-        Followers: ${gfollowers}
-        Following : ${gfollowings}
-        Repositories: ${grepo}
-        Website: ${blog}
-        Company: ${gcompany}
-        Github url: ${glink}`
+Username: ${gusername}
+Bio: ${gbio}
+Followers: ${gfollowers}
+Following : ${gfollowings}
+Repositories: ${grepo}
+Website: ${blog}
+Company: ${gcompany}
+Github url: ${glink}`
 
         message.channel.send(`>>> ${gitData}`)
 
