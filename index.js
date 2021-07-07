@@ -38,22 +38,22 @@ message.channel.send(`>>> ${commandList}`);
 else if(command === "weather") {
     const apiKey = "89ef8a05b6c964f4cab9e2f97f696c81"; 
     const kelvin = 273; 
-    let location = capitalizeFirstLetter(agruments[0])
-    let api = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`;
+    var location = capitalizeFirstletter(agruments[0])
+    var api = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`;
     fetch(api)
     .then(resposne => resposne.json())
     .then(data => {
 
- let weather = data['weather'][0]['main'];
- let description = data['weather'][0]['description'];
- let temp = data['main']['temp'];
+ var weather = data['weather'][0]['main'];
+ var description = data['weather'][0]['description'];
+ var temp = data['main']['temp'];
      temp = temp - kelvin;
- let feels_like = data['main']['feels_like'];
- let country = data['sys']['country'];
- let name = data['name'];
- let feels = feels_like - kelvin;
+ var feels_like = data['main']['feels_like'];
+ var country = data['sys']['country'];
+ var name = data['name'];
+ var feels = feels_like - kelvin;
 
-let weatherSatus = `Weather at ${name}: ${weather}
+var weatherSatus = `Weather at ${name}: ${weather}
 Status: ${description}
 Temp : ${temp} °C
 Feels Like : ${feels} °C
@@ -68,18 +68,18 @@ Country: ${country} `;
 
 ///BIN Checker 
 else if(command === "bin"){
-    let bin = agruments[0];
+    var bin = agruments[0];
     fetch(`https://binssuapi.vercel.app/api/${bin}`)
     .then(resposne => resposne.json())
     .then(data => {
-        let bank = data['data']['bank'];
-        let country = data['data']['country'];
-        let brand = data['data']['vendor'];
-        let level = data['data']['level'];
-        let type = data['data']['type'];
-        let flag = data['data']['countryInfo']['emoji'];
+        var bank = data['data']['bank'];
+        var country = data['data']['country'];
+        var brand = data['data']['vendor'];
+        var level = data['data']['level'];
+        var type = data['data']['type'];
+        var flag = data['data']['countryInfo']['emoji'];
 
-        let binData = `Bin: ${bin}
+        var binData = `Bin: ${bin}
 Brand: ${brand}
 Level: ${level}
 Bank: ${bank}
@@ -95,20 +95,48 @@ Country: ${country} ${flag}`;
 }
 
 
+//Flag
+///BIN Checker 
+else if(command === "flag"){
+    var flag = encodeURI(agruments[0]);
+    console.log(flag)
+    fetch(`https://flagapi.herokuapp.com/api/flag/${flag}`)
+    .then(resposne => resposne.json())
+    .then(data => {
+        let name = data.name
+        let unicode = data.unicode
+        let code = data.code
+        let flag = data.flag
+      
+
+        var flagInfo = `Name: ${name}
+Unicode: ${unicode}
+Code: ${code}
+Flag: ${flag}`;
+        message.channel.send(`>>> ${flagInfo}`)
+
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        message.reply("Invalid Flag");
+      });
+}
+
+
 ///Dictionary
 else if(command === "dict") {
-    let dict = agruments[0];
+    var dict = agruments[0];
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${dict}`)
     .then(resposne => resposne.json())
     .then(data=> {
-       let n = data[0].meanings;
-       let definition = "";
-       let example = "";
+       var n = data[0].meanings;
+       var definition = "";
+       var example = "";
            for(i = 0; i < n.length; i++) {
               definition += (i+1) + ": " + data[0].meanings[i].definitions[0].definition + "\n";
               example += (i+1) + ": " + data[0].meanings[i].definitions[0].example + "\n";
            }
-        let dictMeanings = `Definition: \n${definition}
+        var dictMeanings = `Definition: \n${definition}
                            \nExamples: \n${example}`
              message.channel.send(`>>> ${dictMeanings}`)
     })
@@ -121,18 +149,18 @@ else if(command === "dict") {
 
 ///Time
 else if(command === "time"){
-    let d = new Date();
-    let h = d.getHours();
-    let m = d.getMinutes();
-    let s = d.getSeconds();
-    let time = `${h}:${m}:${s}`
+    var d = new Date();
+    var h = d.getHours();
+    var m = d.getMinutes();
+    var s = d.getSeconds();
+    var time = `${h}:${m}:${s}`
     message.channel.send(`>>> ${time} IST`)
 }
 
 
 ///Echo
 else if(command === "echo"){
-    let echo = "";
+    var echo = "";
     for(i =0; i < agruments.length; i++ ){
         echo += agruments[i]+ " ";
     }
@@ -145,32 +173,32 @@ else if(command === "echo"){
 
 ///Youtube Search
  else if(command === "syt"){
-     let syt = ""
+     var syt = ""
     for(i =0; i < agruments.length; i++ ){
         syt += "+" + agruments[i];
     }
-    let query = `https://www.youtube.com/results?search_query=${syt}`
+    var query = `https://www.youtube.com/results?search_query=${syt}`
 
     message.channel.send(`>>> ${query}`)
  }
 
 ////Github
 else if(command === "git"){
-    let git = agruments[0];
+    var git = agruments[0];
     fetch(`https://api.github.com/users/${git}`)
     .then(resposne => resposne.json())
     .then(data => {
-        let gusername = data['login'];
-        let glink = data['html_url'];
-        let gname = data['name'];
-        let gcompany = data['company'];
-        let blog = data['blog'];
-        let gbio = data['bio'];
-        let grepo = data['public_repos'];
-        let gfollowers = data['followers'];
-        let gfollowings = data['following'];
+        var gusername = data['login'];
+        var glink = data['html_url'];
+        var gname = data['name'];
+        var gcompany = data['company'];
+        var blog = data['blog'];
+        var gbio = data['bio'];
+        var grepo = data['public_repos'];
+        var gfollowers = data['followers'];
+        var gfollowings = data['following'];
 
-        let gitData = `Name: ${gname}
+        var gitData = `Name: ${gname}
 Username: ${gusername}
 Bio: ${gbio}
 Followers: ${gfollowers}
@@ -198,15 +226,15 @@ eg: !rate btc or !rate eth`)
 }
 
 else if(command === "rate"){
-    let crypto = agruments[0].toUpperCase();
-    let coinbaseApi = `https://api.coinbase.com/v2/prices/${crypto}-USD/spot`
+    var crypto = agruments[0].toUpperCase();
+    var coinbaseApi = `https://api.coinbase.com/v2/prices/${crypto}-USD/spot`
 
     fetch(coinbaseApi)
     .then(response => response.json())
     .then(data => {
 
-     let cryptoRate = data['data']['amount'];
-     let cryptoData = `1 ${crypto}
+     var cryptoRate = data['data']['amount'];
+     var cryptoData = `1 ${crypto}
 USD = ${cryptoRate}`
       
      message.channel.send(`>>> ${cryptoData}`)
@@ -225,7 +253,7 @@ USD = ${cryptoRate}`
 
 })
 
-function capitalizeFirstLetter(string) {
+function capitalizeFirstletter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
   
