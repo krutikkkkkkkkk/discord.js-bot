@@ -96,7 +96,37 @@ Country: ${country} ${flag}`;
 
 
 //Flag
-///BIN Checker 
+else if(command === "getflag"){
+    argsconcat = "";
+    for(i=0;i< agruments.length; i++) {
+        argsconcat += agruments[i]+ " ";
+    }
+    let  flag = argsconcat;
+    console.log(flag)
+    fetch(`https://flagapi.herokuapp.com/api/flagName/${flag}`)
+    .then(resposne => resposne.json())
+    .then(data => {
+        let name = data.name
+        let unicode = data.unicode
+        let code = data.code
+        let flag = data.flag
+      
+
+        var flagInfo = `Name: ${name}
+Unicode: ${unicode}
+Code: ${code}
+Flag: ${flag}`;
+        message.channel.send(`>>> ${flagInfo}`)
+
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        message.reply("Invalid Flag");
+      });
+}
+
+
+//Flag
 else if(command === "flag"){
     var flag = encodeURI(agruments[0]);
     console.log(flag)
