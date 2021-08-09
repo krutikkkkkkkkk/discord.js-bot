@@ -69,7 +69,7 @@ Country: ${country} `;
 ///BIN Checker 
 else if(command === "bin"){
     var bin = agruments[0];
-    fetch(`https://binssuapi.vercel.app/api/${bin}`)
+    fetch(`hhttps://bins-api.vercel.app/api/${bin}`)
     .then(resposne => resposne.json())
     .then(data => {
         var bank = data['data']['bank'];
